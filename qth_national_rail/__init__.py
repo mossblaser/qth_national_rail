@@ -1,5 +1,6 @@
 import asyncio
 import datetime
+import traceback
 from argparse import ArgumentParser
 from functools import partial
 
@@ -48,8 +49,11 @@ async def update_trains():
             ]),
             client.set_property(qth_path + "/detailed", trains),
         ], loop=loop)
-    finally:
+        
         loop.call_later(interval, partial(loop.create_task, update_trains()))
+    except (IOError, OSError):
+        traceback.print_exc()
+        loop.call_later(30, partial(loop.create_task, update_trains()))
 
 async def async_main():
     await asyncio.wait([
