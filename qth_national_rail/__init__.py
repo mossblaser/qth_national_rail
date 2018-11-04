@@ -45,7 +45,7 @@ async def update_trains():
             client.set_property(qth_path, [
                 "{} ({})".format(service["std"],
                                  service["etd"])
-                for service in trains.get("trainServices", {}).get("service", [])
+                for service in (trains["trainServices"] or {}).get("service", [])
             ]),
             client.set_property(qth_path + "/detailed", trains),
         ], loop=loop)
