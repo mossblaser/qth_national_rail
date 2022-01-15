@@ -48,7 +48,7 @@ async def update_trains():
                 for service in (trains["trainServices"] or {}).get("service", [])
             ]),
             client.set_property(qth_path + "/detailed", trains),
-        ], loop=loop)
+        ])
         
         loop.call_later(interval, partial(loop.create_task, update_trains()))
     except (IOError, OSError):
@@ -67,7 +67,7 @@ async def async_main():
                         "Details of train departures from {} to {}".format(
                             start_station_code, end_station_code),
                         delete_on_unregister=True),
-    ], loop=loop)
+    ])
     
     await update_trains()
 
@@ -103,7 +103,6 @@ def main():
     
     client = qth.Client(
         "qth_national_rail", "Train departure times for Qth from National Rail Enquiries",
-        loop=loop,
         host=args.host,
         port=args.port,
         keepalive=args.keepalive,
