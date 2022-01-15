@@ -25,13 +25,12 @@ setup(
         "Operating System :: MacOS",
 
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.10",
     ],
     keywords="qth home-automation trains rail",
 
     # Requirements
-    install_requires=["qth>=0.6.0", "zeep>=2.5.0"],
+    install_requires=["qth>=0.7.0", "zeep>=2.5.0"],
 
     # Scripts
     entry_points={
